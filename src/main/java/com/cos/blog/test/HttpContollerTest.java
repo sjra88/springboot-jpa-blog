@@ -16,6 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class HttpContollerTest {
+	
+	private static final String TAG = "HttpConteollerTest: ";
+
+	@GetMapping("/http/lombok")
+	public String lombokTest() {
+		Member m = Member.builder().username("sjra").password("1234").email("sjra@aa.com").build();
+		//Member m = new Member(1, "sjra", "1234", "sjra@aa.com");
+		System.out.println(TAG+"getter: "+m.getId());
+		m.setId(5000);
+		System.out.println(TAG+"setter: "+m.getId());
+		return "lombok test 완료";
+		
+	}
 	// 인터넷 브라우저 테스트는 get밖에 할 수 없다
 	// http://localhost:8080/http/get
 	@GetMapping("/http/get")
@@ -28,6 +41,7 @@ public class HttpContollerTest {
 	
 	// Query String을 모두 받을 때
 	public String getTest(Member m) {
+		
 		return "get 요청: "+ m.getId()+", "+m.getUsername()+","+m.getPassword()+","+m.getEmail();
 	}
 
